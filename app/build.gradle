@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.connectshield.tictactoetdd"
+        applicationId "com.github.johnnysc.tictactoetdd"
         minSdk 23
         targetSdk 32
         versionCode 1

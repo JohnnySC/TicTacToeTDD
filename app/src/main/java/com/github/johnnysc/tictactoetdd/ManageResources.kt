@@ -1,4 +1,4 @@
-package com.connectshield.tictactoetdd
+package com.github.johnnysc.tictactoetdd
 
 import android.content.Context
 import androidx.annotation.StringRes

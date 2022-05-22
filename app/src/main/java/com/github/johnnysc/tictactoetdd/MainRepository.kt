@@ -1,4 +1,4 @@
-package com.connectshield.tictactoetdd
+package com.github.johnnysc.tictactoetdd
 
 /**
  * @author Asatryan on 22.05.2022

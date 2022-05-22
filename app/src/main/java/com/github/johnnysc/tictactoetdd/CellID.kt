@@ -1,4 +1,4 @@
-package com.connectshield.tictactoetdd
+package com.github.johnnysc.tictactoetdd
 
 /**
  *  | UL UM UR |
