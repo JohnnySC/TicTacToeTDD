@@ -28,54 +28,63 @@
         android:rowCount="3">
 
         <ImageButton
+            android:id="@+id/ulButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/umButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/urButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/mlButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/mmButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/mrButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/dlButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/dmButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <ImageButton
+            android:id="@+id/drButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="8dp"
