@@ -1,10 +1,5 @@
 package com.github.johnnysc.tictactoetdd
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
@@ -17,45 +12,211 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
 @LargeTest
-class MainActivityTest {
+class MainActivityTest : BaseTest() {
 
     @get:Rule
     val activityTestRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun test_player_one_win() {
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 1, go!")))
-        onView(withId(R.id.ulButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.umButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.urButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.mlButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.mrButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.mmButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.dlButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.dmButton)).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.drButton)).check(matches(DrawableMatcher(-1)))
+    fun test_player_one_win(): Unit = MainPage().run {
+        //region initial check
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
+        //endregion
 
-        onView(withId(R.id.ulButton)).perform(click()).check(matches(DrawableMatcher(R.drawable.x)))
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 2, go!")))
+        view(ulButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
 
-        onView(withId(R.id.umButton)).perform(click()).check(matches(DrawableMatcher(R.drawable.o)))
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 1, go!")))
+        view(umButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
 
-        onView(withId(R.id.mmButton)).perform(click()).check(matches(DrawableMatcher(R.drawable.x)))
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 2, go!")))
+        view(mmButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
 
-        onView(withId(R.id.mrButton)).perform(click()).check(matches(DrawableMatcher(R.drawable.o)))
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 1, go!")))
+        view(mrButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
 
-        onView(withId(R.id.drButton)).perform(click()).check(matches(DrawableMatcher(R.drawable.x)))
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 1 won!")))
+        view(drButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player1Won)
 
-        onView(withId(R.id.dlButton)).perform(click()).check(matches(DrawableMatcher(-1)))
-        onView(withId(R.id.resultTextView)).check(matches(withText("Player 1 won!")))
+        view(dlButtonId).tap().checkNoDrawable()
+        view(textId).checkText(player1Won)
     }
 
     @Test
-    fun test_game_over() {
-        //todo
+    fun test_game_over() : Unit = MainPage().run {
+        //region initial check
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
+        //endregion
+
+        view(mlButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(dlButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(dmButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(mmButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(mrButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(drButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(urButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(umButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(ulButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(gameOverText)
+
+        view(umButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(gameOverText)
+    }
+
+    @Test
+    fun test_new_game_after_1_win() : Unit = MainPage().run {
+        //region first player won
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
+
+        view(ulButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(umButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(mmButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(mrButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(drButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player1Won)
+        //endregion
+
+        view(newGameButtonId).tap()
+
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
+    }
+
+    /**
+     * 1. 3 steps made
+     * 2. New game
+     * 3. Player 2 wins
+     * 4. New game
+     */
+    @Test
+    fun test_new_game_after_3_steps_and_replay_new_game() : Unit = MainPage().run {
+        //region 1. 3 steps made
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
+
+        view(ulButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(umButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(mmButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        //endregion
+
+        //2. New game
+        view(newGameButtonId).tap()
+
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
+
+        //3. PLayer 2 wins
+        view(ulButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(umButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(mlButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(mmButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player1StepText)
+
+        view(drButtonId).tap().checkDrawable(xResourceId)
+        view(textId).checkText(player2StepText)
+
+        view(dmButtonId).tap().checkDrawable(oResourceId)
+        view(textId).checkText(player2Won)
+
+        //4.New game
+        view(newGameButtonId).tap()
+
+        view(textId).checkText(player1StepText)
+        view(ulButtonId).checkNoDrawable()
+        view(umButtonId).checkNoDrawable()
+        view(urButtonId).checkNoDrawable()
+        view(mlButtonId).checkNoDrawable()
+        view(mrButtonId).checkNoDrawable()
+        view(mmButtonId).checkNoDrawable()
+        view(dlButtonId).checkNoDrawable()
+        view(dmButtonId).checkNoDrawable()
+        view(drButtonId).checkNoDrawable()
     }
 }
